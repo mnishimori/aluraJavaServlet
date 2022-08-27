@@ -18,9 +18,16 @@ public class NovaEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("Cadastrando nova empresa");
+		
         String nomeEmpresa = req.getParameter("nome");
+        Empresa empresa = new Empresa();
+        empresa.setNome(nomeEmpresa);
+        
+        Banco banco = new Banco();
+        banco.adiciona(empresa);
+        
         PrintWriter out = resp.getWriter();
         out.println("<html><body>Empresa " + nomeEmpresa + " cadastrada com sucesso!</body></html>");	
 	}
