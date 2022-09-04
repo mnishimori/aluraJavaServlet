@@ -1,7 +1,6 @@
 package br.com.alura.gerenciador.servlet;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Banco {
@@ -31,7 +30,9 @@ public class Banco {
 
 	public void removerEmpresa(Integer id) {
 		
-		Empresa empresa2 = lista.stream().filter(e -> id.equals(e.getId())).findFirst().get();
+		Empresa empresa2 = lista.stream()
+				.filter(e -> Integer.valueOf(e.getId()).equals(id))
+				.findFirst().get();
 		
 		lista.remove(empresa2);
 		
@@ -41,6 +42,14 @@ public class Banco {
 		 * 
 		 * if (empresa.getId() == id) { it.remove(); } }
 		 */
+	}
+
+	public Empresa buscaEmpresaPorId(Integer id) {
+		
+		return lista.stream()
+				.filter(e -> Integer.valueOf(e.getId()).equals(id))
+				.findFirst()
+				.orElse(null);
 	}
 
 }

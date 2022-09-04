@@ -6,7 +6,7 @@ public class Empresa {
 	
 	private int id;
 	private String nome;
-	private Date dataAbertura;
+	private Date dataAbertura = new Date();
 	
 	
 	public int getId() {
