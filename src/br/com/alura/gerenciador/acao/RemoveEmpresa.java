@@ -21,7 +21,7 @@ public class RemoveEmpresa {
 		Banco banco = new Banco();
 		banco.removerEmpresa(id);
 		
-		response.sendRedirect("listaEmpresas");
+		response.sendRedirect("entrada?acao=ListaEmpresas");
 	}
 
 }
