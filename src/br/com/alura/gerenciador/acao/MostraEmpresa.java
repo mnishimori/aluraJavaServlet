@@ -17,9 +17,8 @@ public class MostraEmpresa {
 		
 		System.out.println("mostrando empresa");
 		
-		String param = request.getParameter("acao");
-		String idString = param.substring(param.indexOf("id")+3);
-		Integer id = Integer.parseInt(idString);
+		String param = request.getParameter("id");
+		Integer id = Integer.parseInt(param);
 		
 		Banco banco = new Banco();
 		Empresa empresa = banco.buscaEmpresaPorId(id);

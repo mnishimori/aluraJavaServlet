@@ -15,9 +15,8 @@ public class RemoveEmpresa {
 		
 		System.out.println("removendo empresa");
 		
-		String paramAcao = request.getParameter("acao");
-		String idString = paramAcao.substring(paramAcao.indexOf("id=")+3);
-		Integer id = Integer.parseInt(idString);
+		String param = request.getParameter("id");
+		Integer id = Integer.parseInt(param);
 		
 		Banco banco = new Banco();
 		banco.removerEmpresa(id);

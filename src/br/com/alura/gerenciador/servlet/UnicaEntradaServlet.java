@@ -28,11 +28,11 @@ public class UnicaEntradaServlet extends HttpServlet {
 			ListaEmpresas listaEmpresas = new ListaEmpresas();
 			listaEmpresas.executa(request, response);
 			
-		} else if (paramAcao.contains("RemoveEmpresa")) {
+		} else if (paramAcao.equals("RemoveEmpresa")) {
 			RemoveEmpresa removeEmpresa = new RemoveEmpresa();
 			removeEmpresa.executa(request, response);
 			
-		} if (paramAcao.contains("MostraEmpresa")) {
+		} if (paramAcao.equals("MostraEmpresa")) {
 			MostraEmpresa mostraEmpresa = new MostraEmpresa();
 			mostraEmpresa.executa(request, response);
 			
