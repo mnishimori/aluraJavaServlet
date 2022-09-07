@@ -1,4 +1,4 @@
-package br.com.alura.gerenciador.servlet;
+package br.com.alura.gerenciador.acao;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -6,25 +6,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.modelo.Banco;
 import br.com.alura.gerenciador.modelo.Empresa;
 
-/**
- * Servlet implementation class alteraEmpresaServlet
- */
-// @WebServlet("/alteraEmpresa")
-public class alteraEmpresaServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class AlteraEmpresa {
+	
+	public void executa(HttpServletRequest request, HttpServletResponse response) 
+			throws IOException, ServletException {
+		
+		System.out.println("alterando empresa");
 
 		String paramId = request.getParameter("id");
 		Integer id = Integer.valueOf(paramId);
@@ -45,6 +38,7 @@ public class alteraEmpresaServlet extends HttpServlet {
         empresa.setNome(nomeEmpresa);
         empresa.setDataAbertura(dataAbertura);
         
-        response.sendRedirect("listaEmpresas");
+        response.sendRedirect("entrada?acao=ListaEmpresas");
 	}
+
 }
