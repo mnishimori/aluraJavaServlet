@@ -14,7 +14,7 @@ import br.com.alura.gerenciador.modelo.Empresa;
 
 public class NovaEmpresa {
 	
-	public void executa(HttpServletRequest request, HttpServletResponse response) 
+	public String executa(HttpServletRequest request, HttpServletResponse response) 
 			throws IOException, ServletException {
 		System.out.println("Cadastrando nova empresa");
 		
@@ -35,6 +35,8 @@ public class NovaEmpresa {
         Banco banco = new Banco();
         banco.adiciona(empresa);
         
-        response.sendRedirect("entrada?acao=ListaEmpresas");	}
+        // response.sendRedirect("entrada?acao=ListaEmpresas");
+        return "redirect:entrada?acao=ListaEmpresas";
+	}
 
 }

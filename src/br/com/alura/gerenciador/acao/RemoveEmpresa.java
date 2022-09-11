@@ -10,7 +10,7 @@ import br.com.alura.gerenciador.modelo.Banco;
 
 public class RemoveEmpresa {
 	
-	public void executa(HttpServletRequest request, HttpServletResponse response) 
+	public String executa(HttpServletRequest request, HttpServletResponse response) 
 			throws IOException, ServletException {
 		
 		System.out.println("removendo empresa");
@@ -21,7 +21,8 @@ public class RemoveEmpresa {
 		Banco banco = new Banco();
 		banco.removerEmpresa(id);
 		
-		response.sendRedirect("entrada?acao=ListaEmpresas");
+		// response.sendRedirect("entrada?acao=ListaEmpresas");
+		return "redirect:entrada?acao=ListaEmpresas";
 	}
 
 }
