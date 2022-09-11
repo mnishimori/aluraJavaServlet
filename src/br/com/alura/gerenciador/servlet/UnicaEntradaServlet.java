@@ -22,14 +22,12 @@ public class UnicaEntradaServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		String paramAcao = request.getParameter("acao");
-
-		String nomeRecurso = "";
-		
-		String classe = "br.com.alura.gerenciador.acao." + paramAcao;
 		try {
+			String paramAcao = request.getParameter("acao");
+			String classe = "br.com.alura.gerenciador.acao." + paramAcao;
+			
 			Acao acao = (Acao) Class.forName(classe).newInstance();
-			nomeRecurso = acao.executa(request, response);
+			String nomeRecurso = acao.executa(request, response);
 			
 			String[] tipoEndereco = nomeRecurso.split(":");
 			
@@ -41,8 +39,7 @@ public class UnicaEntradaServlet extends HttpServlet {
 			}
 			
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServletException(e);
 		}
 	}
 }
