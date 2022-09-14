@@ -13,7 +13,16 @@
 <meta charset="UTF-8">
 <title>Lista de empresas</title>
 </head>
+
 <body>
+	<c:import url="logout-parcial.jsp"/>
+
+	Usuario Logado: ${usuarioLogado.login }
+
+    <br>
+    <br>
+    <br>
+
 	<c:if test="${not empty empresa}">
             Empresa ${ empresa } cadastrada com sucesso!
     </c:if>

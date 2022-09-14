@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.alura.gerenciador.acao.Acao;
 
@@ -24,18 +25,28 @@ public class UnicaEntradaServlet extends HttpServlet {
 		
 		try {
 			String paramAcao = request.getParameter("acao");
-			String classe = "br.com.alura.gerenciador.acao." + paramAcao;
 			
-			Acao acao = (Acao) Class.forName(classe).newInstance();
-			String nomeRecurso = acao.executa(request, response);
+			HttpSession session = request.getSession();
+			boolean usuarioNaoLogado = session.getAttribute("usuarioLogado") == null;
+			boolean isUmaAcaoProtegida = !(paramAcao.equals("Login") || paramAcao.equals("LoginForm"));
 			
-			String[] tipoEndereco = nomeRecurso.split(":");
-			
-			if (tipoEndereco[0].equals("forward")) {
-				RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/" + tipoEndereco[1]);
-				rd.forward(request, response);
+			if (isUmaAcaoProtegida && usuarioNaoLogado) {
+				response.sendRedirect("entrada?acao=LoginForm");
+				
 			} else {
-				response.sendRedirect(tipoEndereco[1]);
+				String classe = "br.com.alura.gerenciador.acao." + paramAcao;
+				
+				Acao acao = (Acao) Class.forName(classe).newInstance();
+				String nomeRecurso = acao.executa(request, response);
+				
+				String[] tipoEndereco = nomeRecurso.split(":");
+				
+				if (tipoEndereco[0].equals("forward")) {
+					RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/" + tipoEndereco[1]);
+					rd.forward(request, response);
+				} else {
+					response.sendRedirect(tipoEndereco[1]);
+				}
 			}
 			
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
