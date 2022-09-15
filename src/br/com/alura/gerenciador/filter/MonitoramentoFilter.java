@@ -1,4 +1,4 @@
-package br.com.alura.gerenciador.servlet;
+package br.com.alura.gerenciador.filter;
 
 import java.io.IOException;
 
@@ -20,6 +20,8 @@ public class MonitoramentoFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		
+		System.out.println(this.getClass().getSimpleName());
 		
 		long antes = System.currentTimeMillis();
 		
